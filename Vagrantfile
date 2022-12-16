@@ -68,7 +68,7 @@ Vagrant.configure("2") do |config|
 			ln -s /usr/share/munin/plugins/mysql_slowqueries /etc/munin/plugins/mysql_slowqueries
 			ln -s /usr/share/munin/plugins/mysql_threads /etc/munin/plugins/mysql_threads
 
-			cat <<-EOF > /etc/wordpress/config-default.php
+			sudo cat <<-EOF > /etc/munin/munin.conf
 			dbdir  /var/lib/munin
 			htmldir /var/cache/munin/www
 			logdir /var/log/munin
@@ -125,7 +125,7 @@ Vagrant.configure("2") do |config|
 		apt-get update
 		apt-get upgrade -y
 		apt-get install -y munin-node munin-plugins-extra 
-		echo "allow 10.0.0.12" >> /etc/munin/munin-node.conf
+		echo "allow ^10.0.0.12$" >> /etc/munin/munin-node.conf
 		systemctl restart munin-node
 	SHELL
 end
